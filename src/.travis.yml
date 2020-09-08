@@ -1,0 +1,36 @@
+language: node_js
+node_js:
+    - "12"
+
+addons:
+  chrome: stable   
+
+env:
+  global:
+    CODECOV_TOKEN=$CODECOV_TOKEN
+
+jobs:
+  include:
+    - stage: Test coverage
+      script:
+        - ng test --browsers=ChromeHeadlessNoSandbox --codeCoverage=true --watch=false
+      after_script: 
+        - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./node_modules/.bin/codecov; fi     
+
+branches:
+  only:
+    - master
+
+version: 2.1
+orbs:
+  heroku: heroku@0.0.10
+workflows:
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git
+
+scripts:
+  - npm install codecov -g
+
+after_success:
+  - codecov
