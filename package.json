@@ -18,7 +18,7 @@
         "lint": "npm run ng -- lint",
         "ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
         "serve": "./node_modules/.bin/static-server dist/UrlCatalog-FrontEnd",
-        "start": "node scripts/start.js",
+        "start": "node start.js",
         "test": "npm run ng -- test",
         "heroku-postbuild": "ng build --prod"
     },
