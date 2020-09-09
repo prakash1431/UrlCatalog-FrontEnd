@@ -21,14 +21,6 @@ branches:
   only:
     - master
 
-version: 2.1
-orbs:
-  heroku: heroku@0.0.10
-workflows:
-  heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
-
 scripts:
   - npm install codecov -g
 
