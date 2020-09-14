@@ -42,14 +42,6 @@ export const ROUTES: Routes = [
             title: 'Pages Register - Url Catalog Angular',
         } as SBRouteData,
     },
-    {
-        path: 'forgot-password',
-        canActivate: [],
-        component: authContainers.ForgotPasswordComponent,
-        data: {
-            title: 'Pages Forgot Password - Url Catalog Angular',
-        } as SBRouteData,
-    },
 ];
 
 @NgModule({

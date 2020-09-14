@@ -5,10 +5,12 @@ import { SortDirection } from '@modules/tables/directives';
 import { Country } from '@modules/tables/models';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { User } from '@testing/mocks';
 
 interface SearchResult {
     countries: Country[];
     total: number;
+    
 }
 
 interface State {
@@ -33,6 +35,8 @@ function sort(countries: Country[], column: string, direction: string): Country[
         });
     }
 }
+
+
 
 function matches(country: Country, term: string, pipe: PipeTransform) {
     return (
@@ -69,6 +73,7 @@ export class CountryService {
             .subscribe(result => {
                 this._countries$.next(result.countries);
                 this._total$.next(result.total);
+                
             });
 
         this._search$.next();
@@ -77,6 +82,7 @@ export class CountryService {
     get countries$() {
         return this._countries$.asObservable();
     }
+
     get total$() {
         return this._total$.asObservable();
     }
@@ -114,17 +120,6 @@ export class CountryService {
     }
 
     private _search(): Observable<SearchResult> {
-        const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
-
-        // 1. sort
-        let countries = sort(COUNTRIES, sortColumn, sortDirection);
-
-        // 2. filter
-        countries = countries.filter(country => matches(country, searchTerm, this.pipe));
-        const total = countries.length;
-
-        // 3. paginate
-        countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-        return of({ countries, total });
+        return new Observable<SearchResult>();
     }
 }

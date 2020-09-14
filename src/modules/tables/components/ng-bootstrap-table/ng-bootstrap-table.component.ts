@@ -1,16 +1,10 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Input,
-    OnInit,
-    QueryList,
-    ViewChildren,
-} from '@angular/core';
-import { SBSortableHeaderDirective, SortEvent } from '@modules/tables/directives';
-import { Country } from '@modules/tables/models';
-import { CountryService } from '@modules/tables/services';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonuserService } from '@modules/tables/services';
+import { CatalogUser } from 'app/global';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'sb-ng-bootstrap-table',
@@ -20,30 +14,42 @@ import { Observable } from 'rxjs';
 })
 export class NgBootstrapTableComponent implements OnInit {
     @Input() pageSize = 4;
-
-    countries$!: Observable<Country[]>;
-    total$!: Observable<number>;
-    sortedColumn!: string;
-    sortedDirection!: string;
-
-    @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
-
-    constructor(
-        public countryService: CountryService,
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    catalogusers$!: Observable<CatalogUser[]>;
+    cataloguserlist!: CatalogUser[];
+    constructor(public commonuserService: CommonuserService, private fb: FormBuilder) {}
+    insertForm!: FormGroup;
 
     ngOnInit() {
-        this.countryService.pageSize = this.pageSize;
-        this.countries$ = this.countryService.countries$;
-        this.total$ = this.countryService.total$;
+        this.catalogusers$ = this.commonuserService.getUsers();
+        this.catalogusers$.subscribe(result => {
+            this.cataloguserlist = result;
+        });
+        // Initialize FormGroup using FormBuilder
+        this.insertForm = this.fb.group({
+            catlog: this.catalogusers$,
+        });
     }
 
-    onSort({ column, direction }: SortEvent) {
-        this.sortedColumn = column;
-        this.sortedDirection = direction;
-        this.countryService.sortColumn = column;
-        this.countryService.sortDirection = direction;
-        this.changeDetectorRef.detectChanges();
+    onSubmit() {
+        if (this.cataloguserlist.find(user => user.isAdmin == true)) {
+            this.commonuserService.updateProfiles(this.cataloguserlist).subscribe(
+                result => {
+                    if (result.message == 'Profiles updated Successfully!') {
+                        Swal.fire({
+                            title: 'Profiles updated Successfully!',
+                        });
+                    }
+                },
+                error => {
+                    Swal.fire({
+                        title: 'Issue in updating the profiles',
+                    });
+                }
+            );
+        } else {
+            Swal.fire({
+                title: 'Atleast one user should be Admin always',
+            });
+        }
     }
 }

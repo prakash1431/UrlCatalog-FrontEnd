@@ -5,10 +5,7 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-            import('modules/auth/auth-routing.module').then(
-                m => m.AuthRoutingModule
-            ),
-        
+            import('modules/auth/auth-routing.module').then(m => m.AuthRoutingModule),
     },
     {
         path: 'dashboard',

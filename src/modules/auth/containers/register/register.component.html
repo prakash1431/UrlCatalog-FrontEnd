@@ -1,29 +1,38 @@
-<sb-layout-auth
-    ><div class="container">
+<sb-layout-auth>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputFirstName">First Name</label><input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" /></div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputFirstName">First Name</label>
+                                        <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" formControlName="firstname"/></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputLastName">Last Name</label><input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" /></div>
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="inputLastName">Last Name</label>
+                                        <input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" formControlName="lastname"/></div>
                                 </div>
                             </div>
-                            <div class="form-group"><label class="small mb-1" for="inputEmailAddress">Email</label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" /></div>
+                            <div class="form-group"><label class="small mb-1" for="inputEmailAddress">Email</label>
+                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" formControlName="email"/></div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label>
+                                        <input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" formControlName="password"/></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label>
+                                        <input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" formControlName="cpassword"/></div>
                                 </div>
                             </div>
-                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" routerLink="/dashboard">Create Account</a></div>
+                            <div class="form-group mt-4 mb-0">
+                                <input class="btn btn-primary btn-block" type="submit" value = "Create Account"/>
+                            </div>
                         </form>
                     </div>
                     <div class="card-footer text-center">
@@ -32,5 +41,27 @@
                 </div>
             </div>
         </div>
-    </div></sb-layout-auth
->
+    </div>
+    <!-- MODAL FOR REGISTRATION ERRORS -->
+<div class="modal" id="errorModal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ modalTitle }}</h4>
+          <button type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="list-group-item active">{{ modalMessage }}</p>
+          <ul class="list-group" *ngFor="let error of errorList">
+            <li class="list-group-item">{{ error }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</sb-layout-auth>

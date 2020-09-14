@@ -34,6 +34,7 @@
         "@angular/platform-browser": "9.1.0",
         "@angular/platform-browser-dynamic": "9.1.0",
         "@angular/router": "9.1.0",
+        "@codewithdan/observable-store": "^2.2.11",
         "@fortawesome/angular-fontawesome": "0.6.1",
         "@fortawesome/fontawesome-svg-core": "1.2.28",
         "@fortawesome/free-brands-svg-icons": "5.13.0",
@@ -45,8 +46,11 @@
         "codecov": "^3.7.2",
         "eslint-plugin-angular": "^4.0.1",
         "express": "^4.17.1",
+        "ngx-cookie-service": "^10.0.1",
+        "ngx-toastr": "^13.0.0",
         "object-hash": "2.0.3",
         "rxjs": "6.5.5",
+        "sweetalert2": "^10.0.2",
         "tslib": "1.11.1",
         "typescript": "3.8.3",
         "uuid": "7.0.3",
@@ -94,10 +98,13 @@
     },
     "husky": {
         "hooks": {
-          "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged"
         }
-      },
-      "lint-staged": {
-        "*.js": ["prettier --write", "git add"]
-      }
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write",
+            "git add"
+        ]
+    }
 }
