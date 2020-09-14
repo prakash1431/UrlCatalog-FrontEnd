@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 const mockUser = new MockUser();
 
-export class UserServiceStub implements UserService {
+export class UserServiceStub {
     set user(user: User) {}
     get user$(): Observable<User> {
         return of(mockUser);
