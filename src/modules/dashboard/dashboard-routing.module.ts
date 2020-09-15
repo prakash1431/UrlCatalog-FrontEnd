@@ -9,6 +9,8 @@ import { DashboardModule } from './dashboard.module';
 /* Containers */
 import * as dashboardContainers from './containers';
 
+import * as dashboardComponents from './components';
+
 /* Guards */
 import * as dashboardGuards from './guards';
 
@@ -63,6 +65,14 @@ export const ROUTES: Routes = [
         } as SBRouteData,
         canActivate: [],
         component: dashboardContainers.LightComponent,
+    },
+    {
+        path: 'filtercards',
+        canActivate: [],
+        component: dashboardComponents.FiltercardsComponent,
+        data: {
+            title: 'All active cards',
+        } as SBRouteData,
     },
 ];
 

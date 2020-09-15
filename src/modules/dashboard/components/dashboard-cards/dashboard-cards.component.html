@@ -1,13 +1,47 @@
 <div class="row">
     <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-primary">
-            <div class="card-body">Active Cards</div>
-        </sb-card-view-details>
+        <mat-card class="mat-card">
+            <mat-card-header>
+              <mat-card-title>Add New Card</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                Add New card to store your url smilar to your bookmark
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button (click)= "addnewcard()">Add</button>
+           </mat-card-actions>
+          </mat-card>
     </div>
     <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-warning">
-            <div class="card-body">To be approved Cards</div>
-        </sb-card-view-details>
+        <mat-card class="mat-card">
+            <mat-card-header>
+              <mat-card-title>Active Cards</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                All Active cards of the organization
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button (click)="proceedallcards()">Proceed</button>
+           </mat-card-actions>
+          </mat-card>
     </div>
-  
+    <div class="col-xl-3 col-md-6">
+        <mat-card class="mat-card">
+            <mat-card-header>
+              <mat-card-title>Pending Cards</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                As your role is administrator you have authority to approve pending cards to make them available with evry one in the organization
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button>Approve</button>
+           </mat-card-actions>
+          </mat-card>
+    </div>
 </div>

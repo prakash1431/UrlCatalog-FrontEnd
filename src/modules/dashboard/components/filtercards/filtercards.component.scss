@@ -1,0 +1,11 @@
+@import 'styles/variables.scss';
+
+.filter-container{
+    display: flexbox;
+    flex-flow: row wrap;
+}
+
+.filter{
+    margin: 10px;
+}
+

@@ -1,0 +1,31 @@
+<mat-expansion-panel [expanded] ="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filters
+      </mat-panel-title>
+      <mat-panel-description class ="grow-1 justify-center">
+        <span [hidden] ="!filters.filtersDescription">{{filters.filtersDescription}} <i [hidden]="!objectsListLength">(displaying{{filteredObjectsListLength}} of {{objectsListLength}})</i></span>
+      </mat-panel-description>
+      <div class = "mat-expansion-panel-header-filler grow-1"></div>
+    </mat-expansion-panel-header>
+<div class = "filter-container">
+    <mat-form-field>
+        <mat-chip-list [selectable] ="true" [multiple] ="true" #chiplist>
+            <mat-chip *ngFor ="let option of filters.visibleFilterOptions" [selected] = "option.selected"
+             (click) = "select(option)" [removable]="true" (removed)="remove(option)">
+                {{option.key}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+             <input placeholder="Filter Items..." 
+             [matChipInputFor]="chiplist"
+             [matChipInputAddOnBlur] = "addOnBlur"
+             (matChipInputTokenEnd) = "add($event)" />
+          </mat-chip-list>
+      </mat-form-field>
+    </div>
+
+    <mat-action-row>
+        <button class="action-button" mat-raised-button color="primary" (click)="resetDefaultFilters()">ResetDefault</button>        
+        <button class="action-button" mat-raised-button color="primary" (click)="openDailog()">More...</button>
+    </mat-action-row>
+    </mat-expansion-panel>

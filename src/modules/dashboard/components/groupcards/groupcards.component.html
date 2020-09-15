@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+    <h3 class="header-filter-type">Owner</h3>
+    <mat-chip-list [selectable] ="true" [multiple] = "true">
+        <mat-chip *ngFor = "let chip of data.filters.owner" [selected] ="chip.selected"
+        (click) ="select(chip)">{{chip.key}}</mat-chip>
+    </mat-chip-list>
+
+    <h3 class="header-filter-type">Tribes</h3>
+    <mat-chip-list [selectable] ="true" [multiple] = "true">
+        <mat-chip *ngFor = "let chip of data.filters.tribe" [selected] ="chip.selected"
+        (click) ="select(chip)">{{chip.key}}</mat-chip>
+    </mat-chip-list>
+
+    <h3 class="header-filter-type">FeatureTeam</h3>
+    <mat-chip-list [selectable] ="true" [multiple] = "true">
+        <mat-chip *ngFor = "let chip of data.filters.featureTeam" [selected] ="chip.selected"
+        (click) ="select(chip)">{{chip.key}}</mat-chip>
+    </mat-chip-list>
+
+    <h3 class="header-filter-type">Application</h3>
+    <mat-chip-list [selectable] ="true" [multiple] = "true">
+        <mat-chip *ngFor = "let chip of data.filters.application" [selected] ="chip.selected"
+        (click) ="select(chip)">{{chip.key}}</mat-chip>
+    </mat-chip-list>
+</div>
+<mat-action-row>
+    <button mat-button [mat-dialog-close] ="data">Close </button>
+</mat-action-row>

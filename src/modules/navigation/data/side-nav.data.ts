@@ -11,7 +11,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'ADDONS',
-        items: ['charts', 'tables'],
+        items: ['Users'],
     },
 ];
 
@@ -51,8 +51,8 @@ export const sideNavItems: SideNavItems = {
                         link: '/auth/register',
                     },
                     {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
+                        text: 'Logout',
+                        link: '/auth/Logout',
                     },
                 ],
             },
@@ -75,14 +75,9 @@ export const sideNavItems: SideNavItems = {
             },
         ],
     },
-    charts: {
-        icon: 'chart-area',
-        text: 'Charts',
-        link: '/charts',
-    },
-    tables: {
+    Users: {
         icon: 'table',
-        text: 'Tables',
+        text: 'Users',
         link: '/tables',
     },
 };

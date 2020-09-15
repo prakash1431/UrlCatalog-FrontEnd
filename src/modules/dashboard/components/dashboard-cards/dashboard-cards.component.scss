@@ -1,1 +1,15 @@
-@import 'styles/variables.scss';
+//@import 'styles/variables.scss';
+.mat-card {
+  max-width: 400px;
+  margin: 8px
+}
+
+.mat-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mat-dialog-actions{
+  display : flexbox;
+  align-items: center;
+}
