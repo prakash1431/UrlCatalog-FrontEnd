@@ -67,9 +67,9 @@ export const ROUTES: Routes = [
         component: dashboardContainers.LightComponent,
     },
     {
-        path: 'filtercards',
+        path: 'urlcatalog',
         canActivate: [],
-        component: dashboardComponents.FiltercardsComponent,
+        component: dashboardContainers.UrlcatalogComponent,
         data: {
             title: 'All active cards',
         } as SBRouteData,

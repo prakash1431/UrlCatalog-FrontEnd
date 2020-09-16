@@ -94,6 +94,13 @@ export class Filters {
         this.filtersDescription = tokens.join(' - ');
     }
 
+    public resetDefaultFilters() {
+        if (this.visibleFilterOptions) {
+            for (let i = 0; i < this.visibleFilterOptions.length; ++i) {
+                this.visibleFilterOptions[i].selected = false;
+            }
+        }
+    }
     public addFilterFromKey(value: string) {
         const key = value.toUpperCase();
         const visibleMatch = this.visibleFilterOptions.find(f => f.upperkey === key);

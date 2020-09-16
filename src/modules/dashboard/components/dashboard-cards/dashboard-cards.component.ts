@@ -22,6 +22,6 @@ export class DashboardCardsComponent implements OnInit {
         });
     }
     proceedallcards() {
-        this.router.navigate(['dashboard/filtercards']);
+        this.router.navigate(['/dashboard/urlcatalog']);
     }
 }

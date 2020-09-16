@@ -17,6 +17,7 @@ import { TablesModule } from '@modules/tables/tables.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatNativeDateModule } from '@angular/material/core';
 
 /* Components */
 import * as dashboardComponents from './components';
@@ -33,6 +34,8 @@ import * as dashboardGuards from './guards';
 import * as dashboardServices from './services';
 import { FiltercardsComponent } from './components/filtercards/filtercards.component';
 import { GroupcardsComponent } from './components';
+import { MaterialFileUploadComponent } from '../app-common/components/material-file-upload/material-file-upload.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
     imports: [
@@ -53,9 +56,15 @@ import { GroupcardsComponent } from './components';
         MatInputModule,
         MatSelectModule,
         MatExpansionModule,
+        MatNativeDateModule,
+        MatProgressBarModule,
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],
-    declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
+    declarations: [
+        ...dashboardContainers.containers,
+        ...dashboardComponents.components,
+        MaterialFileUploadComponent,
+    ],
     exports: [...dashboardContainers.containers, ...dashboardComponents.components],
     entryComponents: [AddcardsComponent, GroupcardsComponent, FiltercardsComponent],
 })

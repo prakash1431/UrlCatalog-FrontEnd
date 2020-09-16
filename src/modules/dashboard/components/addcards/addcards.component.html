@@ -1,36 +1,37 @@
 <div>
+    <form [formGroup]="addCardForm">
     <h1 mat-dialog-title> Submit your entry</h1>
     <div>
         <div>
             <mat-form-field appearence = "fill" [floatLabel] = true>
                 <mat-label>URL</mat-label>
-                <input placeholder="www.xyz.com" matInput>
+                <input placeholder="www.xyz.com" matInput formControlName="longurl">
               </mat-form-field>
         </div>
         <div>
             <mat-form-field appearence = "fill" [floatLabel] = true>
                 <mat-label>Title</mat-label>
-                <input placeholder="Title" matInput>
+                <input placeholder="Title" matInput formControlName="title">
               </mat-form-field>
         </div>
         <div>
             <mat-form-field appearence = "fill" [floatLabel] = true>
                 <mat-label>Description</mat-label>
-                <input placeholder="Description" matInput>
+                <input placeholder="Description" matInput formControlName="description">
               </mat-form-field>
         </div>
         <div>
-            <mat-form-field appearance="fill">
-                <mat-label>Inherited calendar color</mat-label>
-                <input matInput>
-                <mat-datepicker-toggle> </mat-datepicker-toggle>
-                <!--<mat-datepicker></mat-datepicker>-->
+            <mat-form-field color="accent" appearance="fill">
+                <mat-label>Expiry Date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="expirydate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Choose Tribe</mat-label>
-                <mat-select>
+                <mat-select [(value)]="tribe">
                     <mat-option>Clear</mat-option>
                     <mat-option *ngFor="let tribe of keys(tribes)" [value] = "tribe">{{tribe}}</mat-option>
                 </mat-select>
@@ -39,7 +40,7 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Choose Team</mat-label>
-                <mat-select>
+                <mat-select [(value)]="team">
                     <mat-option>Clear</mat-option>
                     <mat-option *ngFor="let team of keys(teams)" [value] = "team">{{team}}</mat-option>
                 </mat-select>
@@ -48,12 +49,18 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Choose Application</mat-label>
-                <mat-select>
+                <mat-select [(value)]="application">
                     <mat-option>Clear</mat-option>
                   <mat-option *ngFor="let app of keys(apps)" [value] = "app">{{app}}</mat-option>
                 </mat-select>
               </mat-form-field>
         </div>
+        <div class ="row">
+            <div class="col-xl-3 col-md-6">
+                <app-material-file-upload (complete)="onFileComplete($event)">
+                </app-material-file-upload>
+            </div>
+          </div>
         <div class ="row">
             <div class="col-xl-3 col-md-6">
             <mat-card-actions>
@@ -66,5 +73,7 @@
              </mat-card-actions>
              </div>
         </div>
+       
     </div>
+</form>
 </div>

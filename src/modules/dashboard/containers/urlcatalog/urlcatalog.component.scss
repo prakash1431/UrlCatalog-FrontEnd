@@ -1,0 +1,61 @@
+.changes-view{
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.changes-container
+{
+    flex: 2;
+}
+
+.changes-card-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    flex-direction: row;
+    margin:0px;
+}
+
+.change-card{
+    width: 270px;
+border-radius: 5px;
+margin :10px;
+padding: 0px 0px 18px 0px;
+display:flex;
+flex-direction: column;
+height: 88%;
+}
+
+.change-card-header{
+    background-color: blue;
+    padding: 15px 15px 0px 0px;
+}
+
+.change-header-image{
+    background-size: cover;
+    height: 40px;
+    margin-right: 10px;
+    fill :blue;
+}
+
+.change-header {
+    width: 100%;
+}
+
+.link-header{
+    color: chocolate;
+    text-decoration: none;
+}
+
+.change-owner{
+    color: chocolate;
+    text-decoration: none;   
+}
+.change-header-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}

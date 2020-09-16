@@ -53,6 +53,7 @@
     "ngx-toastr": "^13.0.0",
     "object-hash": "2.0.3",
     "rxjs": "6.5.5",
+    "rxjs-compat": "^6.5.2",
     "sweetalert2": "^10.0.2",
     "tslib": "1.11.1",
     "typescript": "3.8.3",

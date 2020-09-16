@@ -45,3 +45,28 @@ export class FilterOption {
 export enum ChangeOwner {
     ONLYMYCHANGES = 'ONLYMYCHANGES',
 }
+
+export interface BookMarkcard {
+    [key: string]: string | boolean | Date | Number;
+    UserName: string;
+    LongUrl: string;
+    shortUrl: string;
+    Title: string;
+    Description: string;
+    ExpiryDate: Date;
+    Tribe: string;
+    FeatureTeam: string;
+    Application: string;
+    IconName: string;
+    IsCardValidationRequired: boolean;
+    IsCardExpired: boolean;
+    BookmarkId: Number;
+}
+
+export class Change {
+    application: Application;
+    featureteam: FeatureTeam;
+    tribes: Tribes;
+    owner: ChangeOwner;
+    shortUrl: string;
+}

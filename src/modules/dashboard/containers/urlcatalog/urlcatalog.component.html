@@ -1,0 +1,36 @@
+<sb-filtercards #filters (apply)="applyFilters($event)" [objectsListLength] = "decorators.length"
+[filteredObjectsListLength]="visibleDecoratorsCount"> </sb-filtercards>
+
+<div class="changes-view">
+    <div class="changes-container">
+        <div class="changes-card-container mat-typography">
+            <div *ngFor ="let decorator of decorators">
+                <mat-card class="change-card" *ngIf ="decorator.isVisible" (click) ="selectCard($event,decorator)">
+                    <mat-card-header class="change-card-header">
+                      <div class="change-header-image" [innerHTML] = "decorator.projectImage"></div>
+                      <div class="change-header">
+                      <mat-card-title class="change-header-title">
+                          <a (click) ="stopPropogation($event)" target ="_blank" href ="{{decorator.change.shortUrl}}" 
+                          class ="link-header">{{decorator.change.shortUrl}}</a>
+                        </mat-card-title>
+                      <mat-card-subtitle class="change-owner">{{decorator.change.owner}}</mat-card-subtitle>
+                    </div>
+                    </mat-card-header>
+                
+                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                      <p>
+                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                        bred for hunting.
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <button mat-button>LIKE</button>
+                      <button mat-button>SHARE</button>
+                    </mat-card-actions>
+                  </mat-card> 
+            </div>
+        </div>
+    </div>
+</div>

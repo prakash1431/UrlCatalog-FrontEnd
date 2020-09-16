@@ -52,7 +52,10 @@ export class FiltercardsComponent implements OnInit {
         this.filters.addFilter(option);
         this.filtersChanged(true);
     }
-    resetDefaultFilters() {}
+    resetDefaultFilters() {
+        this.filters.resetDefaultFilters();
+        this.filtersChanged();
+    }
 
     select(option : FilterOption)
     {
