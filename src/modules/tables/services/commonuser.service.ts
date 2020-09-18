@@ -11,8 +11,8 @@ import { map, shareReplay } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class CommonuserService {
-    private baseUrlUsers = 'https://localhost:44367/api/v1/profile/GetAllUsers';
-    private baseUrlUpdateUserRoles = 'https://localhost:44367/api/v1/profile/UpdateProfile';
+    private baseUrlUsers = 'https://urlcatalogapi.herokuapp.com/api/v1/profile/GetAllUsers';
+    private baseUrlUpdateUserRoles = 'https://urlcatalogapi.herokuapp.com/api/v1/profile/UpdateProfile';
     public catalogusers$!: Observable<CatalogUser[]>;
     constructor(
         private http: HttpClient,

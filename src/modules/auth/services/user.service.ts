@@ -14,8 +14,8 @@ import { RegisterViewModel } from '../models/auth.model';
     providedIn: 'root',
 })
 export class UserService extends ObservableStore<StoreState> {
-    private baseUrlRegister = 'https://localhost:44367/api/v1/account/register';
-    private baseUrlAuth = 'https://localhost:44367/api/v1/account/auth';
+    private baseUrlRegister = 'https://urlcatalogapi.herokuapp.com/api/v1/account/register';
+    private baseUrlAuth = 'https://urlcatalogapi.herokuapp.com/api/v1/account/auth';
     private baseUrlLogout = '/api/v1/account/logout';
 
     private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());

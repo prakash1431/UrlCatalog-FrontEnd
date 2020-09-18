@@ -13,9 +13,9 @@ import { StoreState } from '../../auth/models';
     providedIn: 'root',
 })
 export class BookmarkService extends ObservableStore<StoreState> {
-    private baseUrlCreateBookMark = 'https://localhost:44367/api/v1/bookmark/addbookmark';
-    private baseUrlgetBookMarks = 'https://localhost:44367/api/v1/bookmark/GetAllcards';
-    private baseUrlApproveBookMark = 'https://localhost:44367/api/v1/bookmark/Approve';
+    private baseUrlCreateBookMark = 'https://urlcatalogapi.herokuapp.com/api/v1/bookmark/addbookmark';
+    private baseUrlgetBookMarks = 'https://urlcatalogapi.herokuapp.com/api/v1/bookmark/GetAllcards';
+    private baseUrlApproveBookMark = 'https://urlcatalogapi.herokuapp.com/api/v1/bookmark/Approve';
     bookMarkcard = {} as BookMarkcard;
     public bookmarkcards$: Observable<BookMarkcard[]>;
     constructor(

@@ -29,7 +29,7 @@ height: 88%;
 }
 
 .change-card-header{
-    background-color: navajowhite;
+    background-color: lightsteelblue;
     padding: 15px 15px 0px 0px;
 }
 
@@ -37,8 +37,7 @@ height: 88%;
     background-size: cover;
     height: 40px;
     margin-right: 10px;
-    fill : navajowhite;
-    background-image: url('https://file.io/w6tKdZC1cJ5V');
+    background-image: url("https://www.linkpicture.com/q/images_55.png");
 }
 
 .change-header {
@@ -52,11 +51,21 @@ height: 88%;
 
 .change-owner{
     color: chocolate;
-    text-decoration: none;   
+    text-decoration: none;
+    margin-left :-30px !important;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    font-size: 9px;
 }
 .change-header-title {
-    width: 100%;
+    
     display: flex;
     justify-content: space-between;
     flex-flow: row wrap;
+}
+
+.changes-body
+{
+    background-color: mintcream;
 }

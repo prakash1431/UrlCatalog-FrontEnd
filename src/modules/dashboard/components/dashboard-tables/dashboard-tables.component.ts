@@ -11,5 +11,8 @@ export class DashboardTablesComponent implements OnInit {
     constructor() {}
     ngOnInit() {
         this.isAdmin = false;
+        if (Global.userrole === 'Administrator') {
+            this.isAdmin = true;
+        }
     }
 }
