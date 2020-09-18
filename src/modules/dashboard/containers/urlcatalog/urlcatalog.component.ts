@@ -143,7 +143,7 @@ export class UrlcatalogComponent implements OnInit {
         );
     }
 
-    private approve(change: BookMarkcard) {
+    public approve(change: BookMarkcard) {
         this.bmsvc.approveBookmarkCard(change).subscribe(
             result => {
                 if (result.message === 'Card Approved') {
