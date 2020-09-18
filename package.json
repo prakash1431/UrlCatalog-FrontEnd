@@ -20,7 +20,7 @@
     "serve": "./node_modules/.bin/static-server dist/UrlCatalog-FrontEnd",
     "start": "node start.js",
     "test": "npm run ng -- test",
-    "heroku-postbuild": "ng build --prod = false"
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
