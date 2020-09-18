@@ -2,14 +2,12 @@ import { Platform } from '@angular/cdk/platform';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Tribes } from 'app/global';
-import { FeatureTeam } from 'app/global';
-import { Application, BookMarkcard } from 'app/global';
-import { stringify } from 'querystring';
+import { Application, BookMarkcard, FeatureTeam, Tribes } from 'app/global';
+import { letProto } from 'rxjs-compat/operator/let';
 import Swal from 'sweetalert2';
 
 import { BookmarkService } from '../../services/bookmark.service';
-
+declare let $: any;
 @Component({
     selector: 'sb-addcards',
     templateUrl: './addcards.component.html',
@@ -27,9 +25,12 @@ export class AddcardsComponent implements OnInit {
     expirydate: FormControl = new FormControl();
     tribe: string;
     team: string;
+    icon: FormControl = new FormControl();
     application: string;
     bookmarkcard: BookMarkcard;
     errorList: string[] = [];
+    updateProfileForm: FormGroup;
+    profpicfile: FormControl = new FormControl();
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<AddcardsComponent>,
@@ -42,6 +43,7 @@ export class AddcardsComponent implements OnInit {
             title: this.title,
             description: this.description,
             expirydate: this.expirydate,
+
         });
     }
 
@@ -52,7 +54,7 @@ export class AddcardsComponent implements OnInit {
             .addbookmark(card, this.team, this.tribe, this.application, this.ImageUrl)
             .subscribe(
                 result => {
-                    if (result.message == 'Card Successfully Created!') {
+                    if (result.message === 'Card Successfully Created!') {
                         Swal.fire({
                             title: 'Card Successfully Created!',
                         }).then(r => {
@@ -71,10 +73,22 @@ export class AddcardsComponent implements OnInit {
     cancel() {
         this.dialogRef.close();
     }
-    onFileComplete(data: any) {
-        if (data.success) {
-            this.ImageUrl = data.link;
+
+    triggerInput() {
+        $('#profpicfile').trigger('click');
+    }
+
+    onFileChanged(event) {
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            const file = event.target.files[0];
+            this.addCardForm.get('profpicfile').setValue(file);
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                $('#profpic')
+                    .find('img')
+                    .attr('src', reader.result as string);
+            };
         }
-        console.log(data);
     }
 }

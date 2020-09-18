@@ -4,33 +4,34 @@
 <div class="changes-view">
     <div class="changes-container">
         <div class="changes-card-container mat-typography">
-            <div *ngFor ="let decorator of decorators">
+            <ng-container *ngFor ="let decorator of decorators">
                 <mat-card class="change-card" *ngIf ="decorator.isVisible" (click) ="selectCard($event,decorator)">
                     <mat-card-header class="change-card-header">
-                      <div class="change-header-image" [innerHTML] = "decorator.projectImage"></div>
+                      <div class="change-header-image" mat-card-avatar [innerHTML] = "decorator.projectImage"></div>
                       <div class="change-header">
-                      <mat-card-title class="change-header-title">
-                          <a (click) ="stopPropogation($event)" target ="_blank" href ="{{decorator.change.shortUrl}}" 
-                          class ="link-header">{{decorator.change.shortUrl}}</a>
+                      <mat-card-title classg="change-header-title">
+                        <mat-label>{{decorator.change.title}}</mat-label>
                         </mat-card-title>
-                      <mat-card-subtitle class="change-owner">{{decorator.change.owner}}</mat-card-subtitle>
+                      <mat-card-subtitle class="change-owner">
+                        <a (click) ="stopPropogation($event)" target ="_blank" href ="{{decorator.change.shortUrl}}" 
+                    class ="link-header">{{decorator.change.shortUrl}}</a>
+                      </mat-card-subtitle>
                     </div>
                     </mat-card-header>
-                
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                                    
                     <mat-card-content>
                       <p>
-                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                        bred for hunting.
+                        {{decorator.change.description}}
                       </p>
                     </mat-card-content>
                     <mat-card-actions>
-                      <button mat-button>LIKE</button>
-                      <button mat-button>SHARE</button>
+                      <button mat-button disabled>Team : {{decorator.change.featureTeam}}</button>
+                      <button mat-button disabled>Tribe : {{decorator.change.tribe}}</button>
+                      <button mat-button disabled>Application : {{decorator.change.application}}</button>
+                      <button mat-button (click)="approve(decorator.change)" *ngIf = "decorator.change.isCardValidationRequired">Approve</button>
                     </mat-card-actions>
                   </mat-card> 
-            </div>
+            </ng-container>
         </div>
     </div>
 </div>

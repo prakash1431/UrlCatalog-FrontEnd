@@ -10,6 +10,8 @@
 }
 
 .mat-dialog-actions{
-  display : flexbox;
+  display : block;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: auto;
 }

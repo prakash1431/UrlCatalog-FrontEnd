@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { BookMarkcard, ChangeOwner, FilterOption, FilterType, Global } from '@app/global';
+import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { FiltercardsComponent } from '../../components/filtercards/filtercards.component';
@@ -23,23 +24,12 @@ export class UrlcatalogComponent implements OnInit {
     public visibleDecoratorsCount = 0;
     public decorators: ChangeDecorator[] = [];
     public selectedCard: SelectedChange;
+    public bookmarkcards$: Observable<BookMarkcard[]>;
+    public bookMarkcardslist: BookMarkcard[];
     constructor(private bmsvc: BookmarkService, private sanitizer: DomSanitizer) {}
-
+    isAdmin = false;
     async ngOnInit() {
-        this.bmsvc.getbookmarkCards().subscribe(
-            changes =>
-                (this.decorators = changes.map<ChangeDecorator>(
-                    c => new ChangeDecorator(c, this.sanitizer, false)
-                )),
-            err => {
-                Swal.fire({
-                    title: 'Bookmarks cannot be loaded',
-                });
-            },
-            () => {
-                this.filterComponent.filtersChanged();
-            }
-        );
+        this.LoadCards();
     }
 
     public showAction(action: string): boolean {
@@ -79,21 +69,21 @@ export class UrlcatalogComponent implements OnInit {
                 case FilterType.Application:
                     result[FilterType.Application] =
                         result[FilterType.Application] ||
-                        change.Application.toLowerCase() === filterValue;
+                        change.application.toLowerCase() === filterValue;
                     break;
                 case FilterType.FeatureTeam:
                     result[FilterType.FeatureTeam] =
                         result[FilterType.FeatureTeam] ||
-                        change.FeatureTeam.toLowerCase() === filterValue;
+                        change.featureTeam.toLowerCase() === filterValue;
                     break;
                 case FilterType.Tribes:
                     result[FilterType.Tribes] =
-                        result[FilterType.Tribes] || change.Tribe.toLowerCase() === filterValue;
+                        result[FilterType.Tribes] || change.tribe.toLowerCase() === filterValue;
                     break;
                 case FilterType.Custom:
                     result[FilterType.Custom] =
                         result[FilterType.Custom] ||
-                        change.UserName.toLowerCase().indexOf(filterValue) > -1;
+                        change.userName.toLowerCase().indexOf(filterValue) > -1;
                     break;
             }
         }
@@ -125,16 +115,61 @@ export class UrlcatalogComponent implements OnInit {
     public stopPropogation(event: MouseEvent) {
         event.stopPropagation();
     }
+
+    private LoadCards() {
+        if (Global.userrole === 'Administrator') {
+            this.isAdmin = true;
+        }
+        this.bookmarkcards$ = this.bmsvc.getbookmarkCards();
+        this.bookmarkcards$.subscribe(
+            changes =>
+                this.isAdmin
+                    ? (this.decorators = changes.map<ChangeDecorator>(
+                          c => new ChangeDecorator(c, this.sanitizer, false)
+                      ))
+                    : (this.decorators = changes
+                          .filter(z => z.isCardValidationRequired === false)
+                          .map<ChangeDecorator>(
+                              c => new ChangeDecorator(c, this.sanitizer, false)
+                          )),
+            err => {
+                Swal.fire({
+                    title: 'Bookmarks cannot be loaded',
+                });
+            },
+            () => {
+                this.filterComponent.filtersChanged();
+            }
+        );
+    }
+
+    private approve(change: BookMarkcard) {
+        this.bmsvc.approveBookmarkCard(change).subscribe(
+            result => {
+                if (result.message === 'Card Approved') {
+                    Swal.fire({
+                        title: 'Card Approved',
+                    }).then(r => {
+                        this.LoadCards();
+                    });
+                }
+            },
+            error => {
+                Swal.fire({
+                    title: 'Failed to save the card',
+                });
+            }
+        );
+    }
 }
 
 export class ChangeDecorator {
     change: BookMarkcard;
     projectImage: SafeHtml;
     isVisible: boolean;
-
     constructor(change: BookMarkcard, sanitizer: DomSanitizer, isVisible: boolean) {
         this.change = change;
-        this.projectImage = sanitizer.bypassSecurityTrustHtml(change.IconName);
+        this.projectImage = sanitizer.bypassSecurityTrustHtml(change.iconName);
         this.isVisible = isVisible;
     }
 }

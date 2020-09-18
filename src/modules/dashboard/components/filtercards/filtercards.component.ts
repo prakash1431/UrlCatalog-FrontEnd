@@ -1,12 +1,13 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes'
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FilterOption,FilterType } from 'app/global';
+import { FilterOption, FilterType } from 'app/global';
+
 import { GroupcardsComponent } from '../groupcards/groupcards.component';
-import {Filters} from './Filters';
+
+import { Filters } from './Filters';
 
 @Component({
     selector: 'sb-filtercards',
@@ -23,32 +24,31 @@ export class FiltercardsComponent implements OnInit {
     public filters: Filters = new Filters();
     constructor(private router: Router, private dialog: MatDialog, private route: ActivatedRoute) {}
 
-    ngOnInit(){
-        this.route.queryParams.subscribe(params => {
-            this.filters.parseRouterParameters(params);
-            this.resetDefaultFilters();
-        }).unsubscribe();
+    ngOnInit() {
+        this.route.queryParams
+            .subscribe(params => {
+                this.filters.parseRouterParameters(params);
+                this.resetDefaultFilters();
+            })
+            .unsubscribe();
     }
 
     openDailog() {
         const dialogRef = this.dialog.open(GroupcardsComponent, {
             data: {
-                filters :this.filters
+                filters: this.filters,
             },
-            disableClose: true 
+            disableClose: true,
         });
 
-        dialogRef.afterClosed().subscribe(result =>{
+        dialogRef.afterClosed().subscribe(result => {
             console.log('The Dialog was closed');
         });
 
-        dialogRef.componentInstance.applyNewSelection.subscribe(
-            option => this.addOption(option));
+        dialogRef.componentInstance.applyNewSelection.subscribe(option => this.addOption(option));
     }
-    
 
-    private addOption(option : FilterOption)
-    {
+    private addOption(option: FilterOption) {
         this.filters.addFilter(option);
         this.filtersChanged(true);
     }
@@ -57,43 +57,43 @@ export class FiltercardsComponent implements OnInit {
         this.filtersChanged();
     }
 
-    select(option : FilterOption)
-    {
+    select(option: FilterOption) {
         option.selected = !option.selected;
         this.filtersChanged(true);
     }
 
-    public filtersChanged(shouldUpdateQueryParams=false)
-    {
+    public filtersChanged(shouldUpdateQueryParams = false) {
         this.filters.computeDescription();
         this.apply.emit(this.filters.visibleFilterOptions);
-        if(shouldUpdateQueryParams){
+        if (shouldUpdateQueryParams) {
             this.updateQueryParams();
         }
     }
 
-    private updateQueryParams(){
-        this.router.navigate([],{relativeTo:this.route, queryParams:{filters:this.filters.getAsQueryParams()}});
+    private updateQueryParams() {
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: { filters: this.filters.getAsQueryParams() },
+        });
     }
 
-    public add(event: MatChipInputEvent) : void {
+    public add(event: MatChipInputEvent): void {
         const input = event.input;
-        const value = (event.value || '').replace(/\s+/g,'')
-        if(value.length === 0){
-
+        const value = (event.value || '').replace(/\s+/g, '');
+        if (value.length === 0) {
         }
         this.filters.addFilterFromKey(value);
 
         this.filtersChanged(true);
 
-        if(input){
+        if (input) {
             input.value = '';
         }
-        }
+    }
 
-        remove(option: FilterOption):void{
-            if(this.filters.remove(option)){
-                this.filtersChanged(true);
-            }
+    remove(option: FilterOption): void {
+        if (this.filters.remove(option)) {
+            this.filtersChanged(true);
         }
+    }
 }

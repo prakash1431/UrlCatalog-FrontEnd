@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
+import { Global } from 'app/global';
 @Component({
     selector: 'sb-dashboard-tables',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7,6 +7,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['dashboard-tables.component.scss'],
 })
 export class DashboardTablesComponent implements OnInit {
+    isAdmin = false;
     constructor() {}
-    ngOnInit() {}
+    ngOnInit() {
+        this.isAdmin = false;
+    }
 }

@@ -55,12 +55,30 @@
                 </mat-select>
               </mat-form-field>
         </div>
-        <div class ="row">
+        <div class="form-group" id="profpic">
+          <img [src]="icon" id="imgProfile"  class="img-thumbnail"  alt="" />
+        <div>
+          <fieldset class="border p-3 mt-4">
+            <div class="col-12">
+              <div class="form-group" id="profpic">
+                <div class="mt-2">
+                  <input type="file" (change)="onFileChanged($event)" id="profpicfile"  name="profpicfile"/>
+                  <a (click)="triggerInput()" class="btn btn-sm btn-success w-100 text-white">Upload Avatar</a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+        <!--<div class ="row">
             <div class="col-xl-3 col-md-6">
                 <app-material-file-upload (complete)="onFileComplete($event)">
                 </app-material-file-upload>
             </div>
+          </div>-->
           </div>
+        </form>
+    </div>
         <div class ="row">
             <div class="col-xl-3 col-md-6">
             <mat-card-actions>
@@ -73,7 +91,3 @@
              </mat-card-actions>
              </div>
         </div>
-       
-    </div>
-</form>
-</div>

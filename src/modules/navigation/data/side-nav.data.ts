@@ -7,11 +7,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'INTERFACE',
-        items: ['layouts', 'pages'],
-    },
-    {
-        text: 'ADDONS',
-        items: ['Users'],
+        items: ['pages'],
     },
 ];
 
@@ -37,41 +33,11 @@ export const sideNavItems: SideNavItems = {
     },
     pages: {
         icon: 'book-open',
-        text: 'Pages',
+        text: 'Profile',
         submenu: [
             {
-                text: 'Authentication',
-                submenu: [
-                    {
-                        text: 'Login',
-                        link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Logout',
-                        link: '/auth/Logout',
-                    },
-                ],
-            },
-            {
-                text: 'Error',
-                submenu: [
-                    {
-                        text: '401 Page',
-                        link: '/error/401',
-                    },
-                    {
-                        text: '404 Page',
-                        link: '/error/404',
-                    },
-                    {
-                        text: '500 Page',
-                        link: '/error/500',
-                    },
-                ],
+                text: 'Logout',
+                link: '/auth/login',
             },
         ],
     },

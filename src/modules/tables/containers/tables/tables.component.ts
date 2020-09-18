@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Global } from 'app/global';
 
 @Component({
     selector: 'sb-tables',
@@ -7,6 +8,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['tables.component.scss'],
 })
 export class TablesComponent implements OnInit {
+    isAdmin = false;
     constructor() {}
-    ngOnInit() {}
+    ngOnInit() {
+        if (Global.userrole === 'Administrator') {
+            this.isAdmin = true;
+        }
+    }
 }

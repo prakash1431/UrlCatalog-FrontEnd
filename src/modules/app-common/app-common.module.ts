@@ -22,7 +22,6 @@ import * as appCommonGuards from './guards';
 import * as appCommonServices from './services';
 import * as authServices from '@modules/auth/services';
 
-
 @NgModule({
     imports: [CommonModule, RouterModule, ...thirdParty],
     providers: [...appCommonServices.services, ...authServices.services, ...appCommonGuards.guards],

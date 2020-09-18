@@ -31,42 +31,6 @@ export const ROUTES: Routes = [
         component: dashboardContainers.DashboardComponent,
     },
     {
-        path: 'static',
-        data: {
-            title: 'Dashboard Static - Url Catalog Angular',
-            breadcrumbs: [
-                {
-                    text: 'Dashboard',
-                    link: '/dashboard',
-                },
-                {
-                    text: 'Static',
-                    active: true,
-                },
-            ],
-        } as SBRouteData,
-        canActivate: [],
-        component: dashboardContainers.StaticComponent,
-    },
-    {
-        path: 'light',
-        data: {
-            title: 'Dashboard Light - Url Catalog Angular',
-            breadcrumbs: [
-                {
-                    text: 'Dashboard',
-                    link: '/dashboard',
-                },
-                {
-                    text: 'Light',
-                    active: true,
-                },
-            ],
-        } as SBRouteData,
-        canActivate: [],
-        component: dashboardContainers.LightComponent,
-    },
-    {
         path: 'urlcatalog',
         canActivate: [],
         component: dashboardContainers.UrlcatalogComponent,

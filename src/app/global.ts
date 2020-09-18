@@ -47,20 +47,20 @@ export enum ChangeOwner {
 }
 
 export interface BookMarkcard {
-    [key: string]: string | boolean | Date | Number;
-    UserName: string;
-    LongUrl: string;
+    [key: string]: string | boolean | Date | number;
+    application: string;
+    bookmarkId: number;
+    description: string;
+    expiryDate: Date;
+    featureTeam: string;
+    iconName: string;
+    isCardExpired: boolean;
+    isCardValidationRequired: boolean;
+    longUrl: string;
     shortUrl: string;
-    Title: string;
-    Description: string;
-    ExpiryDate: Date;
-    Tribe: string;
-    FeatureTeam: string;
-    Application: string;
-    IconName: string;
-    IsCardValidationRequired: boolean;
-    IsCardExpired: boolean;
-    BookmarkId: Number;
+    title: string;
+    tribe: string;
+    userName: string;
 }
 
 export class Change {

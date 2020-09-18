@@ -18,7 +18,6 @@ export class NgBootstrapTableComponent implements OnInit {
     cataloguserlist!: CatalogUser[];
     constructor(public commonuserService: CommonuserService, private fb: FormBuilder) {}
     insertForm!: FormGroup;
-
     ngOnInit() {
         this.catalogusers$ = this.commonuserService.getUsers();
         this.catalogusers$.subscribe(result => {
